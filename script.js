@@ -24,6 +24,20 @@ let lstImages =[];
 const response = await fetch(url, config);
 const data = await response.json();
 
+
+/*
+VErsão usando Promise()
+
+let result = fetch(url, config);
+let lstImages = [];
+result
+    .then((response) => {
+        response.json();
+    }
+    .then((data) => {
+        lstImages = data;
+    })
+*/
 data.forEach((element) => {
     lstImages.push(element);
 });
@@ -35,22 +49,43 @@ return lstImages;
 
 }
 
-let lstImages = [];
+let result = listImages('https://jsonplaceholder.typicode.com/photos');
 
-
+let list = [];
 
     
 //javascript is asynchronous, so the list will be empty when the console.log is executed
 
-lstImages = listImages('https://jsonplaceholder.typicode.com/photos');
-lstImages.then((data) => {
-    console.log(data);
-    console.log(data.length);
-    console.log(data[0].url);
-    console.log(data[0].thumbnailUrl);
-    console.log(data[0].title);
-    console.log(data[0].albumId);
-    console.log(data[0].id);
-});
- 
+
+let lista = document.getElementById('lista');
+
+let images;
+
+result
+    .then((response) => {
+        list = response;   
+    })
+    .then(() => {
+        for(let i = 0; i < 10; i++){
+            lista.innerHTML += `<div><img src="${list[i].thumbnailUrl}"/"></div>`;
+        }
+        // lista.innerHTML += `<div><img src="${list[0].url}"/"></div>`;
+
+        // list.forEach((element) => {
+        //     lista.innerHTML += `<div><img src="${element.url}"/"></div>`;
+        // });
+    })
+    .then(() => {
+        images = document.querySelectorAll('img');
+    })
+    .then(() => {
+        images.forEach((element) => {
+            element.addEventListener('click', () => {
+                console.log(element.src);
+            });
+        });
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
