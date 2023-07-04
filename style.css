@@ -1,0 +1,42 @@
+/*
+Por padrão a largura e a altura de um elemento HTML é dado pela soma de suas propriedades width ou height com o padding e a borda. 
+
+Se usarmos a propriedade box-sizing: border-box, o tamanho do elemento será dado somente pelo width e height, incluindo o padding e a borda dentro dele.
+
+
+*/
+
+
+* {
+    box-sizing: border-box;   
+}
+
+.container {
+    padding: 10px;
+    border: 1px solid black;
+    background-color: rgb(243, 229, 211);
+    display: grid;
+    grid-template-columns: 20% auto; /* 4 colunas*/
+}
+td {
+    padding: 5px;
+    text-align: left;
+}
+tfoot {
+    font-style: italic;
+    font-size: smaller;
+}
+
+
+@media screen and (min-width: 480px) {
+    body {
+      background-color: rgb(204, 142, 189);
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    body {
+      background-color: rgb(204, 195, 142);
+    }
+  }
+
